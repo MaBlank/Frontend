@@ -1,0 +1,39 @@
+<div class="row mt-5">
+  <div class="col-12">
+    <h1 class="mb-5 display-4">Annotationsservice</h1>
+    <hr>
+    <ngx-annotate-text
+      [(annotations)]="annotations"
+      [removable]="true"
+      [text]="text"
+      annotationClass="my-annotation"
+      (clickAnnotation)="onClickAnnotation($event)"
+      (removeAnnotation)="onRemoveAnnotation($event)"
+      #annotateText
+    >
+    </ngx-annotate-text>
+    <hr>
+  </div>
+</div>
+<div class="row mt-3">
+  <div class="col-12">
+    <button
+      *ngFor="let button of annotationButtons"
+      type="button"
+      class="btn btn-primary me-2"
+      [style.background-color]="button.color"
+      (click)="addAnnotation(button.label, button.color)"
+    >
+      {{button.label}}
+    </button>
+    <input type="color" [(ngModel)]="newAnnotationColor" placeholder="Choose color">
+    <input type="text" [(ngModel)]="newAnnotationLabel" placeholder="Enter label">
+    <button
+      type="button"
+      class="btn btn-outline-secondary me-2"
+      (click)="addAnnotation(newAnnotationLabel, newAnnotationColor)"
+    >
+      Add Custom Annotation
+    </button>
+  </div>
+</div>
