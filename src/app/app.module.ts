@@ -17,12 +17,14 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatSortModule} from "@angular/material/sort";
 import {MatTableModule} from "@angular/material/table";
 import {HttpClientModule} from "@angular/common/http";
+import { ProjectNewComponent } from './project-new/project-new.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AnnotationPageComponent,
-    ProjectListPageComponent
+    ProjectListPageComponent,
+    ProjectNewComponent,
   ],
   imports: [
     BrowserModule,

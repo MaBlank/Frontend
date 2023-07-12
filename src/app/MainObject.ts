@@ -8,7 +8,6 @@ export interface MainObject {
 export interface Annotations {
   annotation: Annotation[];
 }
-
 export interface Annotation {
   start: number;
   end: number;

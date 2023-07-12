@@ -10,11 +10,8 @@ import {SidenavService} from "./sidenav-service.service";
 })
 export class AppComponent implements AfterViewInit, OnDestroy {
   @ViewChild('sidenav') sidenav: MatSidenav | undefined;
-
   private sidenavSub: Subscription | undefined;
-
   constructor(private sidenavService: SidenavService) {}
-
   ngAfterViewInit() {
     if (this.sidenav) {
       this.sidenavSub = this.sidenavService.sidenavOpen$
@@ -27,7 +24,6 @@ export class AppComponent implements AfterViewInit, OnDestroy {
         });
     }
   }
-
   ngOnDestroy() {
     this.sidenavSub?.unsubscribe();
   }

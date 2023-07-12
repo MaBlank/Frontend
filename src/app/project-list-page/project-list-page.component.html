@@ -15,14 +15,12 @@
         </th>
         <td mat-cell *matCellDef="let element" class="column-name">{{ element.name }}</td>
       </ng-container>
-
       <ng-container matColumnDef="link">
         <th mat-header-cell *matHeaderCellDef class="column-link"></th>
         <td mat-cell *matCellDef="let element" class="column-link">
           <button mat-button color="primary" (click)="onLinkClick(element)">Öffnen</button>
         </td>
       </ng-container>
-
       <ng-container matColumnDef="export">
         <th mat-header-cell *matHeaderCellDef class="column-export"></th>
         <td mat-cell *matCellDef="let element" class="column-export">
@@ -41,7 +39,6 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-
     <hr>
     <h1 class="mb-5 display-4">Neues Projekt anlegen</h1>
     <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
