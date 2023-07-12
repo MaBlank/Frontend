@@ -2,14 +2,16 @@
   <mat-sidenav #sidenav mode="over">
     <button mat-raised-button class="sidenav-button" routerLink="/annotation" routerLinkActive="active">Annotation</button>
     <button mat-raised-button class="sidenav-button" routerLink="/project-list" routerLinkActive="active">Projektliste</button>
-    <button mat-icon-button (click)="sidenav.toggle()">
-      <mat-icon aria-label="Close sidenav">close</mat-icon>
-    </button>
+    <div class="center-container">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon aria-label="Close sidenav">close</mat-icon>
+      </button>
+    </div>
   </mat-sidenav>
   <mat-sidenav-content>
-    <button mat-icon-button (click)="sidenav.toggle()">
-      <mat-icon>menu</mat-icon>
-    </button>
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

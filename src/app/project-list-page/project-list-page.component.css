@@ -18,3 +18,47 @@
 .project {
   margin-bottom: 20px;
 }
+.file-input {
+  display: none;
+}
+.form-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start; /* Align items to the start of the container */
+  align-items: stretch;
+  flex-wrap: nowrap; /* Prevent items from wrapping to the next line */
+}
+
+.form-element {
+  flex: 0 0 auto;
+  margin: 0 10px;
+}
+
+.btn {
+  width: 150px;
+}
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.column-position {
+  width: 50px;  /* adjust as per your requirement */
+}
+
+.column-name {
+  width: 150px; /* adjust as per your requirement */
+}
+
+.column-link {
+  width: 120px; /* adjust as per your requirement */
+}
+
+.column-export {
+  width: 120px; /* adjust as per your requirement */
+}
+
+
+

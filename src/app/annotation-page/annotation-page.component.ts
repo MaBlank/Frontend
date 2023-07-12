@@ -14,16 +14,13 @@ export class AnnotationPageComponent {
     new Annotation(47, 52, 'Country', '#198754'),
     new Annotation(77, 85, 'Time', '#6c757d'),
   ];
-
   annotationButtons = [
     { label: 'Date', color: '#0d6efd' },
     { label: 'Time', color: '#6c757d' },
     { label: 'Country', color: '#198754' },
     { label: 'City', color: '#dc3545' },
   ];
-
   events: string[] = [];
-
   newAnnotationColor = '#000000';
   newAnnotationLabel = '';
 
@@ -31,12 +28,10 @@ export class AnnotationPageComponent {
     if (!this.ngxAnnotateText) {
       return;
     }
-
     const selection = this.ngxAnnotateText.getCurrentTextSelection();
     if (!selection) {
       return;
     }
-
     if (this.ngxAnnotateText.isOverlappingWithExistingAnnotations(selection)) {
       alert('The selected text is already annotated.');
       return;
@@ -51,7 +46,6 @@ export class AnnotationPageComponent {
   onClickAnnotation(annotation: Annotation) {
     this.events.push(`Clicked on '${annotation}'`);
   }
-
   onRemoveAnnotation(annotation: Annotation): void {
     this.events.push(`Removed '${annotation}'`);
   }

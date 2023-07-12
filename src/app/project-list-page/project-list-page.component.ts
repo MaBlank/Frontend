@@ -1,12 +1,13 @@
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
-import {MatSort, Sort, MatSortModule} from '@angular/material/sort';
-import {MatTableDataSource, MatTableModule} from '@angular/material/table';
-import { MatIconModule } from '@angular/material/icon';
+import {MatSort, Sort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 import {FormBuilder} from "@angular/forms";
-import {MatInputModule} from "@angular/material/input";
-import {MatSelectModule} from "@angular/material/select";
 import {SidenavService} from "../sidenav-service.service";
+import { FormGroup, Validators } from '@angular/forms';
+import {UploadService} from "../upload-service.service";
+import {ProjectService} from "../api-service.service";
+import {MainObject} from "../MainObject";
 
 export interface Element {
   position: number;
@@ -25,14 +26,19 @@ const ELEMENT_DATA: Element[] = [
   templateUrl: './project-list-page.component.html',
   styleUrls: ['./project-list-page.component.css'],
 })
+
 export class ProjectListPageComponent implements AfterViewInit {
-  displayedColumns: string[] = ['position', 'name', 'link'];
+  displayedColumns: string[] = ['position', 'name', 'link', 'export'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
+  uploadForm: FormGroup;
+  selectedFile: File | undefined;
+  private selectedFormat: any;
+  projects: MainObject[] = [];
 
-  constructor(private sidenavService: SidenavService, private _liveAnnouncer: LiveAnnouncer, private formBuilder: FormBuilder) {}
-
-  toggleSidenav() {
-    this.sidenavService.toggleSidenav();
+  constructor(private projectService: ProjectService, private sidenavService: SidenavService, private _liveAnnouncer: LiveAnnouncer, private formBuilder: FormBuilder, private uploadService: UploadService) {
+    this.uploadForm = this.formBuilder.group({
+      projectName: ['', Validators.required]
+    });
   }
   @ViewChild(MatSort) sort: MatSort | undefined;
 
@@ -49,5 +55,31 @@ export class ProjectListPageComponent implements AfterViewInit {
   }
   onLinkClick(element: Element) {
     console.log(`Link clicked for element: ${element.name}`);
+  }
+  onFileSelected(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      this.selectedFile = file;
+    }
+  }
+  onExportClick(element: Element) {
+    console.log(`Export clicked for element: ${element.name}`);
+  }
+
+  onFormatChange(event: any, element: any) {
+    this.selectedFormat = event.value;
+  }
+  onSubmit() {
+    if (!this.uploadForm.valid || !this.selectedFile) {
+      return;
+    }
+    const projectName = this.uploadForm.get('projectName')?.value;
+    this.uploadService.uploadFile(projectName, this.selectedFile).subscribe(
+    );
+  }
+  ngOnInit(): void {
+    this.projectService.getProjects().subscribe(data => {
+      this.projects = data;
+    });
   }
 }

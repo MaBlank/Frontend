@@ -26,14 +26,14 @@
     >
       {{button.label}}
     </button>
-    <input type="color" [(ngModel)]="newAnnotationColor" placeholder="Choose color">
-    <input type="text" [(ngModel)]="newAnnotationLabel" placeholder="Enter label">
+    <input type="color" [(ngModel)]="newAnnotationColor" placeholder="Farbe">
+    <input type="text" [(ngModel)]="newAnnotationLabel" placeholder="Name">
     <button
       type="button"
       class="btn btn-outline-secondary me-2"
       (click)="addAnnotation(newAnnotationLabel, newAnnotationColor)"
     >
-      Add Custom Annotation
+      Annotation hinzufügen
     </button>
   </div>
 </div>

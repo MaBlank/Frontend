@@ -16,6 +16,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatButtonModule} from "@angular/material/button";
 import {MatSortModule} from "@angular/material/sort";
 import {MatTableModule} from "@angular/material/table";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,9 @@ import {MatTableModule} from "@angular/material/table";
     BrowserAnimationsModule,
     NgxAnnotateTextModule,
     FormsModule,
+    ReactiveFormsModule,
     MatSidenavModule,
+    HttpClientModule,
     MatIconModule,
     AppRoutingModule,
     MatTableModule,
