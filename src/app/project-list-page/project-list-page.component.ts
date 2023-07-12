@@ -69,14 +69,7 @@ export class ProjectListPageComponent implements AfterViewInit {
   onFormatChange(event: any, element: any) {
     this.selectedFormat = event.value;
   }
-  onSubmit() {
-    if (!this.uploadForm.valid || !this.selectedFile) {
-      return;
-    }
-    const projectName = this.uploadForm.get('projectName')?.value;
-    this.uploadService.uploadFile(projectName, this.selectedFile).subscribe(
-    );
-  }
+
   ngOnInit(): void {
     this.projectService.getProjects().subscribe(data => {
       this.projects = data;
