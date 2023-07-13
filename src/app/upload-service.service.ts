@@ -8,24 +8,25 @@ import { Observable } from 'rxjs';
 export class UploadService {
   constructor(private http: HttpClient) {}
   uploadFile(projectName: string, file: File, fileType: string): Observable<any> {
-    if (fileType === 'docx') {
-      const formData: FormData = new FormData();
-      formData.append('file', file, file.name);
-      formData.append('projectName', projectName);
-      return this.http.post(`http://localhost:8080/api/uploadDocx?name=${projectName}`, formData);
-    }
-
-    // For txt and xml, read the file as text and send it as a string
     return new Observable((observer) => {
       const reader = new FileReader();
 
-      reader.readAsText(file);
+      if (fileType === 'docx') {
+        reader.readAsDataURL(file);
+      } else {
+        reader.readAsText(file);
+      }
 
       reader.onload = () => {
         let fileData = reader.result?.toString();
-        const url = fileType === 'txt' ? `http://localhost:8080/api/uploadTxt?name=${projectName}` : `http://localhost:8080/api/uploadXml?name=${projectName}`;
+        let url;
 
-        if (fileType === 'txt') {
+        if (fileType === 'docx') {
+          fileData = fileData?.split(',')[1];
+          url = `http://localhost:8080/api/uploadDocx?name=${projectName}`;
+        } else if (fileType === 'txt') {
+          url = `http://localhost:8080/api/uploadTxt?name=${projectName}`;
+
           try {
             const parsedJson = JSON.parse(fileData || '');
             const innerJson = parsedJson.text ? JSON.parse(parsedJson.text) : {};
@@ -33,9 +34,21 @@ export class UploadService {
           } catch (e) {
             console.error('Failed to parse JSON: ', e);
           }
-        }
+        } else if (fileType === 'xml') {
+          url = `http://localhost:8080/api/uploadXml?name=${projectName}`;
+        } else if (fileType === 'json') {
+          url = `http://localhost:8080/api/uploadJson`;
 
-        this.http.post(url, { txt: fileData }).subscribe(
+          try {
+            fileData = JSON.parse(fileData || '');
+          } catch (e) {
+            console.error('Failed to parse JSON: ', e);
+          }
+        }
+        const payload = (fileType === 'xml' || fileType === 'json') ? fileData : { [fileType]: fileData };
+
+        // @ts-ignore
+        this.http.post(url, payload).subscribe(
           (data) => {
             observer.next(data);
             observer.complete();
@@ -43,7 +56,6 @@ export class UploadService {
           (err) => observer.error(err)
         );
       };
-
       reader.onerror = (error) => observer.error(error);
     });
   }

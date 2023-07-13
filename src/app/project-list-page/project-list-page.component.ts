@@ -56,12 +56,6 @@ export class ProjectListPageComponent implements AfterViewInit {
   onLinkClick(element: Element) {
     console.log(`Link clicked for element: ${element.name}`);
   }
-  onFileSelected(event: Event) {
-    const file = (event.target as HTMLInputElement).files?.[0];
-    if (file) {
-      this.selectedFile = file;
-    }
-  }
   onExportClick(element: Element) {
     console.log(`Export clicked for element: ${element.name}`);
   }
@@ -69,7 +63,6 @@ export class ProjectListPageComponent implements AfterViewInit {
   onFormatChange(event: any, element: any) {
     this.selectedFormat = event.value;
   }
-
   ngOnInit(): void {
     this.projectService.getProjects().subscribe(data => {
       this.projects = data;
