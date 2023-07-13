@@ -5,9 +5,9 @@
     <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8">
       <ng-container matColumnDef="position">
         <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number" class="column-position">
-          Nummer
+          GUID
         </th>
-        <td mat-cell *matCellDef="let element" class="column-position">{{ element.position }}</td>
+        <td mat-cell *matCellDef="let element" class="column-position">{{ element.guid}}</td>
       </ng-container>
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name" class="column-name">

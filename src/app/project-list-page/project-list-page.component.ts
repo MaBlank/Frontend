@@ -8,34 +8,20 @@ import { FormGroup, Validators } from '@angular/forms';
 import {UploadService} from "../upload-service.service";
 import {ProjectService} from "../api-service.service";
 import {MainObject} from "../MainObject";
-
-export interface Element {
-  position: number;
-  name: string;
-  link: string;
-}
-
-const ELEMENT_DATA: Element[] = [
-  { position: 1, name: 'Hydrogen', link: 'https://example.com/hydrogen' },
-  { position: 2, name: 'Helium', link: 'https://example.com/helium' },
-  { position: 3, name: 'Lithium', link: 'https://example.com/lithium' },
-];
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-project-list-page',
   templateUrl: './project-list-page.component.html',
   styleUrls: ['./project-list-page.component.css'],
 })
-
 export class ProjectListPageComponent implements AfterViewInit {
   displayedColumns: string[] = ['position', 'name', 'link', 'export'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  dataSource = new MatTableDataSource<MainObject>();
   uploadForm: FormGroup;
-  selectedFile: File | undefined;
   private selectedFormat: any;
-  projects: MainObject[] = [];
 
-  constructor(private projectService: ProjectService, private sidenavService: SidenavService, private _liveAnnouncer: LiveAnnouncer, private formBuilder: FormBuilder, private uploadService: UploadService) {
+  constructor(private projectService: ProjectService, private sidenavService: SidenavService, private _liveAnnouncer: LiveAnnouncer, private formBuilder: FormBuilder, private uploadService: UploadService, private router: Router) {
     this.uploadForm = this.formBuilder.group({
       projectName: ['', Validators.required]
     });
@@ -53,19 +39,20 @@ export class ProjectListPageComponent implements AfterViewInit {
       this._liveAnnouncer.announce('Sorting cleared');
     }
   }
-  onLinkClick(element: Element) {
+
+  onLinkClick(element: MainObject) {
     console.log(`Link clicked for element: ${element.name}`);
+    this.router.navigate(['/annotation', { id: element.guid }]);
   }
-  onExportClick(element: Element) {
+  onExportClick(element: MainObject) {
     console.log(`Export clicked for element: ${element.name}`);
   }
-
   onFormatChange(event: any, element: any) {
     this.selectedFormat = event.value;
   }
   ngOnInit(): void {
     this.projectService.getProjects().subscribe(data => {
-      this.projects = data;
+      this.dataSource.data = data;
     });
   }
 }
