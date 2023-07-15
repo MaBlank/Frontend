@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxAnnotateTextModule } from "ngx-annotate-text";
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';  // Import FormsModule
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatIconModule} from "@angular/material/icon";
 import { AnnotationPageComponent } from './annotation-page/annotation-page.component';
@@ -25,13 +24,13 @@ import { ProjectNewComponent } from './project-new/project-new.component';
     AnnotationPageComponent,
     ProjectListPageComponent,
     ProjectNewComponent,
+
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     NgxAnnotateTextModule,
     FormsModule,
-    ReactiveFormsModule,
     MatSidenavModule,
     HttpClientModule,
     MatIconModule,
@@ -42,7 +41,6 @@ import { ProjectNewComponent } from './project-new/project-new.component';
     MatInputModule,
     MatSelectModule,
     MatFormFieldModule,
-    FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
   ],

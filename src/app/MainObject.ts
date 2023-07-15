@@ -4,9 +4,8 @@ export interface MainObject {
   text: string;
   annotations: Annotations;
 }
-
 export interface Annotations {
-  annotation: Annotation[];
+  annotations: Annotation[];
 }
 export interface Annotation {
   start: number;

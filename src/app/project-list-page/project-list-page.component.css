@@ -60,5 +60,10 @@
   width: 120px; /* adjust as per your requirement */
 }
 
-
+.input-group {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  margin-top: 20px;
+}
 

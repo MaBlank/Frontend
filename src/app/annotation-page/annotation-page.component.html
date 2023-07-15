@@ -5,7 +5,7 @@
     <ngx-annotate-text
       [(annotations)]="annotations"
       [removable]="true"
-      [text]="text"
+      [text]="mainObject.text"
       annotationClass="my-annotation"
       (clickAnnotation)="onClickAnnotation($event)"
       (removeAnnotation)="onRemoveAnnotation($event)"
@@ -20,20 +20,31 @@
     <button
       *ngFor="let button of annotationButtons"
       type="button"
-      class="btn btn-primary me-2"
+      class="btn custom-btn same-size me-2"
       [style.background-color]="button.color"
       (click)="addAnnotation(button.label, button.color)"
+      (contextmenu)="removeAnnotationButton(button.label, button.color, $event)"
     >
       {{button.label}}
     </button>
-    <input type="color" [(ngModel)]="newAnnotationColor" placeholder="Farbe">
-    <input type="text" [(ngModel)]="newAnnotationLabel" placeholder="Name">
+    <div class="input-group">
+      <input type="color" [(ngModel)]="newAnnotationColor" placeholder="Farbe" class="same-size">
+      <input type="text" [(ngModel)]="newAnnotationLabel" placeholder="Name" class="same-size">
+      <button
+        type="button"
+        class="btn btn-outline-secondary same-size me-2"
+        (click)="addAnnotation(newAnnotationLabel, newAnnotationColor)"
+      >
+        Annotation hinzufügen
+      </button>
+    </div>
+    <!-- Save Button -->
     <button
       type="button"
-      class="btn btn-outline-secondary me-2"
-      (click)="addAnnotation(newAnnotationLabel, newAnnotationColor)"
+      class="btn btn-outline-success same-size me-2 mt-2"
+      (click)="onSave()"
     >
-      Annotation hinzufügen
+      Save
     </button>
   </div>
 </div>

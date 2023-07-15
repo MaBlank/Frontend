@@ -1,0 +1,19 @@
+.same-size {
+  height: 40px;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  margin-top: 20px;
+}
+
+.custom-btn {
+  border: none; /* Removes border */
+  outline: none; /* Removes outline */
+}
+
+.custom-btn:hover {
+  opacity: 0.8; /* Makes button slightly transparent when hovered over */
+}
