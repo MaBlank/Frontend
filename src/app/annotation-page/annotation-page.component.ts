@@ -15,8 +15,8 @@ export class AnnotationPageComponent implements OnInit, AfterViewInit {
   id: string | null | undefined;
   mainObject: MainObject = {
     guid: 'dummy',
-    name: 'dummy',
-    text: 'This is a dummy text.',
+    name: 'Beispielstext',
+    text: 'Dies ist ein Beispielstext. Dieser kann nicht gespeichert werden. Legen Sie in der Projektliste ein neues Projekt an.',
     annotations: {
       annotations: []
     }
@@ -105,6 +105,9 @@ export class AnnotationPageComponent implements OnInit, AfterViewInit {
     if (!this.annotationButtons.some(button => button.label === label)) {
       console.log('Adding new button with label:', label);
       this.annotationButtons.push({ label, color });
+      this.annotationButtons = [...this.annotationButtons, { label, color }];
+      this.cd.detectChanges();
+
     } else {
       console.log('Button with label already exists:', label);
     }
@@ -120,6 +123,7 @@ export class AnnotationPageComponent implements OnInit, AfterViewInit {
     this.events.push(`Added '${annotation}'`);
     console.log('Updated events:', this.events);
   }
+
 
   onClickAnnotation(annotation: NgxAnnotation): void {
     this.events.push(`Clicked on '${annotation}'`);
@@ -181,6 +185,5 @@ export class AnnotationPageComponent implements OnInit, AfterViewInit {
       console.log('No id provided, cannot update main object on the server');
     }
   }
-
 }
 

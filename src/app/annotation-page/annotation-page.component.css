@@ -17,3 +17,7 @@
 .custom-btn:hover {
   opacity: 0.8; /* Makes button slightly transparent when hovered over */
 }
+
+h1 {
+  font-size: 30px;
+}

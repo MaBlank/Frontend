@@ -17,6 +17,7 @@ import {MatSortModule} from "@angular/material/sort";
 import {MatTableModule} from "@angular/material/table";
 import {HttpClientModule} from "@angular/common/http";
 import { ProjectNewComponent } from './project-new/project-new.component';
+import { UniqueButtonPipe } from './unique-button.pipe';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ProjectNewComponent } from './project-new/project-new.component';
     AnnotationPageComponent,
     ProjectListPageComponent,
     ProjectNewComponent,
+    UniqueButtonPipe,
 
   ],
   imports: [
