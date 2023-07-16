@@ -13,14 +13,12 @@ import {UploadService} from "../upload-service.service";
 export class ProjectNewComponent {
   uploadForm: FormGroup;
   selectedFile: File | undefined;
-
   constructor(private projectService: ProjectService, private sidenavService: SidenavService, private _liveAnnouncer: LiveAnnouncer, private formBuilder: FormBuilder, private uploadService: UploadService) {
     this.uploadForm = this.formBuilder.group({
       projectName: ['', Validators.required],
       fileType: ['', Validators.required] // added fileType to the form group
     });
   }
-
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
   }
@@ -34,6 +32,9 @@ export class ProjectNewComponent {
     const fileType = this.uploadForm.get('fileType')?.value;
     console.log("Form validity: ", this.uploadForm.valid);
     console.log("Selected file: ", this.selectedFile);
-    this.uploadService.uploadFile(projectName, this.selectedFile, fileType).subscribe();
+    this.uploadService.uploadFile(projectName, this.selectedFile, fileType).subscribe(() => {
+      // After the upload is successful, notify that a new project has been created
+      this.projectService.notifyProjectCreation();
+    });
   }
 }
