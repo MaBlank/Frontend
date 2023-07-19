@@ -10,12 +10,12 @@
 }
 
 .custom-btn {
-  border: none; /* Removes border */
-  outline: none; /* Removes outline */
+  border: none;
+  outline: none;
 }
 
 .custom-btn:hover {
-  opacity: 0.8; /* Makes button slightly transparent when hovered over */
+  opacity: 0.8;
 }
 
 h1 {

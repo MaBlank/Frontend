@@ -15,24 +15,24 @@
   justify-content: center;
   width: 100%;
   margin: 10px auto;
-  background-color: #4CAF50; /* Green background */
-  border: none; /* Remove borders */
-  color: white; /* White text */
-  padding: 15px 32px; /* Some padding */
-  text-align: center; /* Centered text */
-  text-decoration: none; /* Remove underline */
-  font-size: 16px; /* Increase font size */
-  transition: all 0.5s; /* Add a transition on hover */
-  cursor: pointer; /* Add a pointer on hover */
-  border-radius: 5px; /* Rounded corners */
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  transition: all 0.5s;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 .sidenav-button:hover {
-  background-color: #45a049; /* Darker green on mouse-over */
+  background-color: #45a049;
 }
 
 .sidenav-button:active {
-  background-color: #3e8e41; /* Even darker green on click/active */
+  background-color: #3e8e41;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }

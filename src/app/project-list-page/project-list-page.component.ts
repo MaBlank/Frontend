@@ -47,7 +47,6 @@ export class ProjectListPageComponent implements AfterViewInit {
     this.router.navigate(['/annotation', { id: element.guid }]);
   }
 
-
   onExportClick(element: MainObject) {
     let format = this.formats.get(element.guid);
     console.log(`Export clicked for element: ${element.name} in format: ${format}`);
@@ -108,14 +107,12 @@ export class ProjectListPageComponent implements AfterViewInit {
     );
   }
 
-
   onFormatChange(event: any, element: MainObject) {
     this.formats.set(element.guid, event.value);
     console.log(`Format for element ${element.name} set to ${this.formats.get(element.guid)}`);
   }
   ngOnInit(): void {
     this.refreshProjects();
-
     this.projectService.projectCreated.subscribe(() => {
       this.refreshProjects();
     });

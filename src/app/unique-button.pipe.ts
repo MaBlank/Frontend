@@ -9,7 +9,7 @@ export class UniqueButtonPipe implements PipeTransform {
     const map = new Map();
     for (const item of value) {
       if (!map.has(item[label])) {
-        map.set(item[label], true); // set any value to Map
+        map.set(item[label], true);
         result.push(item);
       }
     }

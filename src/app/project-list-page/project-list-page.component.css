@@ -24,9 +24,9 @@
 .form-container {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start; /* Align items to the start of the container */
+  justify-content: flex-start;
   align-items: stretch;
-  flex-wrap: nowrap; /* Prevent items from wrapping to the next line */
+  flex-wrap: nowrap;
 }
 
 .form-element {
@@ -45,19 +45,19 @@
 }
 
 .column-position {
-  width: 50px;  /* adjust as per your requirement */
+  width: 50px;
 }
 
 .column-name {
-  width: 150px; /* adjust as per your requirement */
+  width: 150px;
 }
 
 .column-link {
-  width: 120px; /* adjust as per your requirement */
+  width: 120px;
 }
 
 .column-export {
-  width: 120px; /* adjust as per your requirement */
+  width: 120px;
 }
 
 .input-group {

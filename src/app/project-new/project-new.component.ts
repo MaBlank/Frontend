@@ -16,7 +16,7 @@ export class ProjectNewComponent {
   constructor(private projectService: ProjectService, private sidenavService: SidenavService, private _liveAnnouncer: LiveAnnouncer, private formBuilder: FormBuilder, private uploadService: UploadService) {
     this.uploadForm = this.formBuilder.group({
       projectName: ['', Validators.required],
-      fileType: ['', Validators.required] // added fileType to the form group
+      fileType: ['', Validators.required]
     });
   }
   onFileSelected(event: any) {
@@ -33,7 +33,6 @@ export class ProjectNewComponent {
     console.log("Form validity: ", this.uploadForm.valid);
     console.log("Selected file: ", this.selectedFile);
     this.uploadService.uploadFile(projectName, this.selectedFile, fileType).subscribe(() => {
-      // After the upload is successful, notify that a new project has been created
       this.projectService.notifyProjectCreation();
     });
   }

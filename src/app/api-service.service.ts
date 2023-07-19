@@ -10,13 +10,10 @@ import {MainObject} from "./MainObject";
 export class ProjectService {
   private apiURL = 'http://localhost:8080/api/projects';
   projectCreated = new Subject<void>();
-
   constructor(private http: HttpClient) { }
-
   getProjects(): Observable<MainObject[]> {
     return this.http.get<MainObject[]>(this.apiURL);
   }
-
   notifyProjectCreation() {
     this.projectCreated.next();
   }
