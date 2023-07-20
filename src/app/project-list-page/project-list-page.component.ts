@@ -17,7 +17,7 @@ import {HttpClient} from "@angular/common/http";
   styleUrls: ['./project-list-page.component.css'],
 })
 export class ProjectListPageComponent implements AfterViewInit {
-  displayedColumns: string[] = ['position', 'name', 'link', 'export'];
+  displayedColumns: string[] = ['position', 'name', 'link', 'export', 'delete'];
   dataSource = new MatTableDataSource<MainObject>();
   uploadForm: FormGroup;
   private selectedFormat: any;
@@ -122,5 +122,18 @@ export class ProjectListPageComponent implements AfterViewInit {
     this.projectService.getProjects().subscribe(data => {
       this.dataSource.data = data;
     });
+  }
+  onDeleteClick(element: MainObject) {
+    console.log(`Delete clicked for element: ${element.name}`);
+
+    this.http.delete(`http://localhost:8080/api/deleteDocument/${element.guid}`).subscribe(
+      () => {
+        console.log('Document deleted successfully');
+        this.refreshProjects();
+      },
+      error => {
+        console.error('Error occurred while deleting document: ', error);
+      }
+    );
   }
 }
