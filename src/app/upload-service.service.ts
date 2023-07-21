@@ -6,7 +6,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UploadService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
+
   uploadFile(projectName: string, file: File, fileType: string): Observable<any> {
     return new Observable((observer) => {
       const reader = new FileReader();
@@ -19,8 +21,18 @@ export class UploadService {
         let fileData = reader.result?.toString();
         let url;
         if (fileType === 'docx') {
-          fileData = fileData?.split(',')[1];
-          url = `http://localhost:8080/api/uploadDocx?name=${projectName}`;
+          const formData = new FormData();
+          formData.append('file', file);
+          formData.append('name', projectName);
+          url = `http://localhost:8080/api/uploadDocx`;
+          // @ts-ignore
+          this.http.post(url, formData).subscribe(
+            (data) => {
+              observer.next(data);
+              observer.complete();
+            },
+            (err) => observer.error(err)
+          );
         } else if (fileType === 'txt') {
           url = `http://localhost:8080/api/uploadTxt?name=${projectName}`;
           try {
@@ -30,8 +42,10 @@ export class UploadService {
           } catch (e) {
             console.error('Failed to parse JSON: ', e);
           }
+          this.sendRequest(url, {txt: fileData}, observer);
         } else if (fileType === 'xml') {
           url = `http://localhost:8080/api/uploadXml?name=${projectName}`;
+          this.sendRequest(url, fileData, observer);
         } else if (fileType === 'json') {
           url = `http://localhost:8080/api/uploadJson`;
           try {
@@ -39,18 +53,21 @@ export class UploadService {
           } catch (e) {
             console.error('Failed to parse JSON: ', e);
           }
+          this.sendRequest(url, fileData, observer);
         }
-        const payload = (fileType === 'xml' || fileType === 'json') ? fileData : { [fileType]: fileData };
-        // @ts-ignore
-        this.http.post(url, payload).subscribe(
-          (data) => {
-            observer.next(data);
-            observer.complete();
-          },
-          (err) => observer.error(err)
-        );
       };
       reader.onerror = (error) => observer.error(error);
     });
+  }
+
+  sendRequest(url: string, payload: any, observer: any) {
+    // @ts-ignore
+    this.http.post(url, payload).subscribe(
+      (data) => {
+        observer.next(data);
+        observer.complete();
+      },
+      (err) => observer.error(err)
+    );
   }
 }
