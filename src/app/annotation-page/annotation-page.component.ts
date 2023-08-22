@@ -13,9 +13,9 @@ export class AnnotationPageComponent implements OnInit, AfterViewInit {
   @ViewChild('annotateText') ngxAnnotateText?: NgxAnnotateTextComponent;
   id: string | null | undefined;
   mainObject: MainObject = {
-    guid: 'dummy',
-    name: 'Beispielstext',
-    text: 'Dies ist ein Beispielstext. Dieser kann nicht gespeichert werden. Legen Sie in der Projektliste ein neues Projekt an.',
+    guid: '123',
+    name: 'Beispiel',
+    text: 'I love apples',
     annotations: {
       annotations: []
     }
@@ -38,14 +38,10 @@ export class AnnotationPageComponent implements OnInit, AfterViewInit {
   }
 
   fetchMainObject(): void {
-    console.log('fetchMainObject called');
     if (!this.id) {
-      console.log('No id provided');
       return;
     }
-    console.log(`Fetching main object with id: ${this.id}`);
     this.http.get<MainObject>(`http://localhost:8080/api/documents/${this.id}`).subscribe(data => {
-      console.log('Response from server received:', data);
       this.mainObject = data;
       if (this.mainObject.annotations && this.mainObject.annotations.annotations) {
         console.log('Annotations found in the main object');
@@ -138,7 +134,6 @@ export class AnnotationPageComponent implements OnInit, AfterViewInit {
   }
 
   onSave(): void {
-    console.log('onSave called');
     if (this.mainObject && this.mainObject.annotations) {
       this.mainObject.annotations.annotations = this.annotations.map(annotation => {
         return { start: annotation.startIndex, end: annotation.endIndex, label: annotation.label, color: annotation.color };
